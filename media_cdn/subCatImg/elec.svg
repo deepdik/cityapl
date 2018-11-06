@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" viewBox="0 0 32 32">
+  <style>
+    .st0{fill:#008080;}
+  </style>
+  <g id="XMLID_2_">
+    <g id="XMLID_3_">
+      <g id="XMLID_4_">
+        <path id="XMLID_28_" d="M6.3.5L3.5 3.3v2.2H.6v7h2.9v8H.6v3.9h2.9v7h27.9V.5H6.3zm-4.8 11V6.4h5.9v5H1.5v.1zm0 12v-2h5.9v2H1.5zm29 7h-26v-6h4V23h1v-1h-1v-1.5h-4v-8h4v-1h1v-1h-1v-3h1V6.4h-1v-1h-4V3.7l2.2-2.2h23.8v29z" class="st0"/>
+        <path id="XMLID_25_" d="M19.5 28.5h7v-1h1v-1h-1v-1.1h1v-1.1h-1v-1h1v-1h-1v-1h1v-1h-1v-1h1v-1h-1v-1h1v-1h-1v-1h1v-1h-1v-1h1v-1h-1v-1h1v-1h-1v-.8h1V8.4h-1v-1h1v-1h-1v-1h1v-1h-1v-1h-7v1h-1v1h1v1.1h-1v1.1h1v1h-1v1h1v1h-1v1h1v1h-1v1h1v1h-1v1h1v1h-1v1h1v1h-1v1h1v1h-1v1h1v1h-1v1h1v1.7h-1v1.1h1v1h-1v1h1v.1zm1-24.1h5v23h-5v-23z" class="st0"/>
+        <ellipse id="XMLID_24_" cx="23" cy="6" class="st0" rx=".5" ry=".5"/>
+        <path id="XMLID_21_" d="M16.5 4.4h-4v3.1h4V4.4zm-1 2h-2v-1h2v1z" class="st0"/>
+        <path id="XMLID_18_" d="M16.5 9.5h-4v3h4v-3zm-1 2h-2v-1h2v1z" class="st0"/>
+        <path id="XMLID_15_" d="M9.5 13.9v1h-1v-1h-1v1h-1v3h1v1h1v-1h1v1h1v-1h1v1h1v-1h1v-3h-1v-1h-1v1h-1v-1h-1zm3 2.1v1H7.6v-1h4.9z" class="st0"/>
+        <path id="XMLID_12_" d="M7.6 25.5c-1.1 0-2 .8-2 2s.9 2 2 2c1 0 2-.8 2-2s-1-2-2-2zm0 3c-.5 0-1-.4-1-1 0-.5.4-1 1-1 .5 0 1 .4 1 1-.1.5-.5 1-1 1z" class="st0"/>
+        <path id="XMLID_9_" d="M12.5 25.5c-1.1 0-2 .8-2 2s.9 2 2 2 2-.8 2-2-.9-2-2-2zm0 3c-.5 0-1-.4-1-1 0-.5.4-1 1-1 .5 0 1 .4 1 1 0 .5-.4 1-1 1z" class="st0"/>
+        <path id="XMLID_8_" d="M11.5 21.5h1v2h-1v-2z" class="st0"/>
+        <path id="XMLID_7_" d="M13.5 21.5h1v2h-1v-2z" class="st0"/>
+        <path id="XMLID_6_" d="M15.5 21.5h1v2h-1v-2z" class="st0"/>
+        <ellipse id="XMLID_5_" cx="6.5" cy="3.5" class="st0" rx=".5" ry=".5"/>
+      </g>
+    </g>
+  </g>
+</svg>

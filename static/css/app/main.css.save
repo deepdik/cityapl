@@ -1,0 +1,253 @@
+}
+.green {
+  background: #b9f6ca; }
+.teal {
+  background: #008080;
+    color:#fff;
+}
+
+/*  ------------------------  SLIDER CSS -------------------------------*/
+ .imgslider{
+      height: 260px;
+      width: 100%;
+  }
+  .slider{
+      width: 69vw;
+  }
+
+.vmidleft{
+    position: absolute;
+    top: 30%;
+    z-index: 1;
+    margin-left: 7%;
+}
+    .vmidright{
+    position: absolute;
+    top: 30%;
+    z-index: 1;
+          margin-left: 90%;
+}
+  .vmcontent{
+      position: absolute;
+      top: 30%;
+      text-align: center;
+      color: white;
+      width:250px;
+      margin-left:5%;
+      background: rgba(11, 12, 2, 0.3);
+      padding:10px;
+  }
+/*-------------------------------- animated button -----------------------------*/
+.boxCenter{
+    text-align: center;
+}
+.box {
+  position:relative;
+  vertical-align: middle;
+  color: #0b7;
+  display: inline-block;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  transition: 0.5s;
+  padding: 0 20px;
+  cursor: pointer;
+  border: 2px solid #0b7;
+  -webkit-transition:0.5s;
+}
+
+.box:hover {
+  border: 2px solid rgba(0,160,80,0);
+  color: #FFF;
+}
+
+.box::before, .box::after {
+  width: 100%;
+  height:100%;
+  z-index: 3;
+  content:'';
+  position: absolute;
+  top:0;
+  left:0;
+  box-sizing: border-box;
+  -webkit-transform: scale(0);
+  transition: 0.5s;
+}
+
+.foo::before {
+  border-bottom: 3px solid #FFF;
+  border-left: 3px solid #FFF;
+  -webkit-transform-origin: 0 100%;
+}
+
+.foo::after {
+  border-top: 3px solid #FFF;
+  border-right: 3px solid #FFF;
+  -webkit-transform-origin: 100% 0%;
+}
+
+
+.box:hover::after, .box:hover::before {
+  -webkit-transform: scale(1);
+}
+
+/*------------=-------------------- title -----------------------------*/
+
+.title{
+    padding: 25px;
+    font-size:2em;
+    color: teal;
+    text-align: center;
+}
+
+/*---------------------- media query ------------------------------------------------*/
+
+/* @media screen and (max-width: 900px) {
+    .slider{
+        width: 100vw;
+    }
+    .vmidleft,.vmidright{
+        top:25%;
+    }
+    .boxCenter h3{
+        font-size: 1em;
+    }
+}
+*/
+.parent {
+  overflow: hidden;
+}
+
+.parent img {
+  width: 100%;
+  height: auto;
+}
+
+.searchInput{
+    padding: 5px;
+    font-size: 15px;
+    height: 35px;
+    border: none;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius:5px;
+    width: 80%;
+}
+.searchForm{
+    margin-left: 30px;
+}
+.mainSubHeading span{
+    padding: 5px;
+    font-size: 12px;
+}
+a{
+    text-decoration: none;
+}
+a:hover{
+    color:#000000;
+}
+.mainSubHeading span a{
+    color:#fff;
+    cursor: pointer;
+}
+.noPadding{
+    padding: 0px;
+}
+.noMargin{
+    margin:0px;
+}
+
+/* dialogAccounts css*/
+.accountsBox{
+    padding:25px;
+    min-width: 300px;
+}
+.left{
+    float: left;
+ }
+.clear{
+    clear:both;
+}
+/* dialogAccounts css end*/
+
+.liked svg{
+  fill:#008080;
+}
+.disliked svg{
+  fill:#FF5722;
+}
+
+.disliked svg:hover{
+  fill:#008080;
+}
+
+.svgSideNav{
+  padding: 0px 0px 0px 10px;
+}
+.svgSideNav md-icon{
+  height: 32px;
+  width: 32px;
+}
+.catImgHome{
+  height: 50px;
+  width: 50px;
+}
+.st0{
+  fill:"#008080";
+}
+.categoryTileText{
+  text-align: center;
+  font-size: 13px;
+}
+
+.breadCrumb{
+  background: #fff;
+  color:#808080;
+  padding: 10px;
+  margin: 0px;
+}
+.capitalize {
+    text-transform: capitalize;
+}
+
+a{
+  cursor:pointer;
+}
+md-toast.md-success-toast-theme .md-toast-content {
+    background-color: #5FBA7D;
+}
+
+md-toast.md-error-toast-theme .md-toast-content {
+    background-color: maroon;
+}
+.changePasswordBox{
+    background: #fff;
+}
+.changePasswordBoxContent{
+  padding: 20px;
+margin: 20px;
+}
+
+
+.formError{
+  font-size: 0.75em;
+  color: red;
+  padding: 3px;
+}
+#myMap{
+    width: 500px;
+    height: 300px;
+  }
+@media (max-width: 960px) {
+  #myMap{
+    width: 250px;
+    height: 300px;
+  }
+    .searchForm{
+        margin-left: 5px ;
+    }
+    .md-headline{
+      font-size: 15px;
+      line-height: 20px;
+      color: black;
+    }
+}

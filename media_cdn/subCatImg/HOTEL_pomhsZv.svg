@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 32 32" style="enable-background:new 0 0 32 32;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:none;stroke:#008080;stroke-width:2;stroke-miterlimit:10;}
+	.st1{fill:none;stroke:#008080;stroke-miterlimit:10;}
+	.st2{fill:#008080;}
+	.st3{font-family:'Calibri-Bold';}
+	.st4{font-size:6.3661px;}
+</style>
+<line id="XMLID_1_" class="st0" x1="4" y1="0" x2="4" y2="32"/>
+<line id="XMLID_2_" class="st0" x1="5" y1="5" x2="31" y2="5"/>
+<rect id="XMLID_3_" x="6.5" y="8.5" class="st1" width="21.9" height="12.9"/>
+<line id="XMLID_4_" class="st1" x1="11.5" y1="5" x2="11.5" y2="9"/>
+<line id="XMLID_5_" class="st1" x1="23.5" y1="5" x2="23.5" y2="9"/>
+<text id="XMLID_6_" transform="matrix(0.9405 0 0 1 8.4163 14.8337)" class="st2 st3 st4">HOTEL</text>
+<path id="XMLID_18_" class="st2" d="M18.5,16.2l0.4,1.4h1.5l-1.2,1l0.4,1.4l-1.2-0.9L17.3,20l0.4-1.4l-1.2-0.9H18
+	C18,17.7,18.5,16.2,18.5,16.2z"/>
+<path id="XMLID_16_" class="st2" d="M22.5,16.2l0.4,1.4h1.5l-1.2,1l0.4,1.4l-1.2-0.9L21.3,20l0.4-1.4l-1.2-0.9h1.5
+	C22.1,17.7,22.5,16.2,22.5,16.2z"/>
+<path id="XMLID_19_" class="st2" d="M14.4,16.2l0.4,1.4h1.5l-1.3,1l0.4,1.4l-1.2-0.9L13.2,20l0.4-1.4l-1.2-1h1.5L14.4,16.2z"/>
+<path id="XMLID_21_" class="st2" d="M10.1,16.2l0.4,1.4h1.5l-1.2,1l0.4,1.4l-1.2-0.9L8.9,20l0.4-1.4l-1.2-1h1.5L10.1,16.2z"/>
+</svg>

@@ -1,0 +1,215 @@
+<md-sidenav layout="column" md-component-id="catNav" ng-cloak class="md-sidenav-left md-whiteframe-4dp">
+    <md-toolbar class="md-tall md-hue-2">
+        <div ng-href="\category" layout="column" class="md-toolbar-tools-bottom inset" layout-align="center center">
+            <div><img src="media/img/logo.png" style="width:45px;height:45px;"/>
+            </div>
+            <div>&nbspCityAPL</div>
+            <span style="font-size:0.5em">Your Choice Our Information Better Decision</span>
+        </div>
+    </md-toolbar>
+    <md-list>
+        <md-list-item>
+            <md-item flex>
+                <a ng-click="closeSidenav()" href="/">
+                    <md-item-content md-ink-ripple="#919191" layout="row" layout-align="start center">
+                        <div class="inset">
+                            <!--<ng-md-icon icon=""></ng-md-icon>-->
+                        </div>
+                        <div class="inset">Home
+                        </div>
+                    </md-item-content>
+                </a>
+            </md-item>
+        </md-list-item>
+        <md-subheader ng-show="userLoggedIn" class="md-no-sticky">User Account</md-subheader>
+        <md-list-item ng-show="userLoggedIn">
+            <md-item flex>
+                <a ng-click="closeSidenav()" href="">
+                    <md-item-content  md-ink-ripple="#919191" layout="row" layout-align="start center">
+                        <div class="inset">
+                            <!--<ng-md-icon icon="{{item.icon}}"></ng-md-icon>-->
+                        </div>
+                        <div class="inset">My Profile
+                        </div>
+                    </md-item-content>
+                </a>
+            </md-item>
+        </md-list-item>
+
+        <md-list-item ng-show="userLoggedIn">
+            <md-item flex>
+                <a ng-href="/changepassword" ng-click="closeSidenav()" href="">
+                    <md-item-content  md-ink-ripple="#919191" layout="row" layout-align="start center">
+                        <div class="inset">
+                            <!--<ng-md-icon icon="{{item.icon}}"></ng-md-icon>-->
+                        </div>
+                        <div class="inset">Change Password
+                        </div>
+                    </md-item-content>
+                </a>
+            </md-item>
+        </md-list-item>
+
+        <md-subheader class="md-no-sticky">Categories</md-subheader>
+        <md-list-item ng-repeat="data in dataSet | orderBy:'name'">
+            <md-item flex>
+                <a ng-click="closeSidenav()" ng-href="category/{{ data.id }}">
+                    <md-item-content md-ink-ripple="#919191" layout="row" layout-align="start center">
+                        <div class="svgSideNav">
+                            <md-icon class="md-default-theme"  md-svg-src="{{data.catImg}}"></md-icon>
+                        </div>
+                        <div class="inset">{{ data.name }}
+                        </div>
+                    </md-item-content>
+                </a>
+            </md-item>
+        </md-list-item>
+    </md-list>
+</md-sidenav>
+<div layout="column" layout-fill>
+    <!-- DESKTOP TOOLBAR -->
+    <md-toolbar class="hide-sm hide-xs md-whiteframe-3dp">
+        <div class="mainSubHeading" layout="row">
+            <div flex="10"></div>
+            <span>Your Choice Our Information Better Decision</span>
+            <span flex></span>
+            <span><a ng-click="showFreeListingDialog($event)">Free Listing</a></span>
+            <span><a>AboutUs</a></span>
+            <span><a>Career</a></span>
+            <span ng-show="userLoggedIn"><a ng-click="showAccountsDialog($event,true)">Logout</a></span>
+            <span ng-show="!userLoggedIn"><a ng-click="showAccountsDialog($event,true)">Login</a></span>
+            <div flex="10"></div>
+        </div>
+        <div class="md-toolbar-tools" ng-cloak>
+            <span flex="5" hide-sm hide-xs></span>
+            <md-button class="md-icon-button" ng-click="toogleSideNav()" aria-label="Menu">
+                <md-icon class="md-default-theme"  md-svg-src="media/svg/menu.svg"></md-icon>
+            </md-button>
+            
+            <img src="media/img/logo.png" style="width:34px;height:34px;"/>
+            <h1 style="font-size: 1.3em">
+                &nbspCityAPL
+            </h1>
+            <form class="searchForm" flex>
+               
+            <div ng-controller="MdAutocompleteBugController as vm" layout="row">
+            
+              
+            <md-autocomplete 
+            class="searchInputBox" 
+             md-selected-item="vm.selectedItem" 
+             md-search-text="searchText" 
+             md-items="item in vm.getMatches(searchText)" 
+             md-item-text="item.shopName" 
+             placeholder="What are you looking for?" 
+             md-no-cache="true" 
+            md-input-minlength="3" >
+                <md-item-template>
+                   
+                    <span md-highlight-text="searchText" md-highlight-flags="^i">
+                    {{item.shopName}}       {{item.category.name}}
+                    </span> 
+
+                                
+                    
+                </md-item-template>
+               
+
+
+                <md-not-found>
+                    No matches found.
+                </md-not-found>
+            </md-autocomplete>
+             <input type="submit" value ="SEARCH" class="md-button md-raised md-warn" ng-click="doSearch(search)" style="margin-left: 1px;" >
+        
+               
+            </div>
+          
+
+               
+            </form>
+            <md-button class="md-button" aria-label="btn" ng-click="showCityDialog($event)">
+                <md-icon class="md-default-theme"   md-svg-src="media/svg/location.svg"></md-icon>
+                {{city}}</md-button>
+                <!-- <md-button class="md-button" aria-label="btn">
+                <md-icon class="md-default-theme"   md-svg-src="media/svg/location.svg"></md-icon>
+                Raebarelli</md-button> -->
+            <md-menu layout="row">
+                <md-button class="md-icon-button" aria-label="user"  ng-click="$mdOpenMenu()">
+                    <md-icon class="md-default-theme" md-svg-src="media/svg/user.svg"></md-icon>
+                </md-button>
+                
+                <md-menu-content width="2" flex >
+                    <md-menu-item ng-show="!userLoggedIn">
+                        <md-button ng-click="showAccountsDialog($event,true)">Login</md-button>
+                    </md-menu-item>
+                    <md-menu-item ng-show="!userLoggedIn">
+                        <md-button ng-click="showAccountsDialog($event,false)">Signup</md-button>
+                    </md-menu-item>
+
+                    <md-menu-item ng-show="userLoggedIn">
+                        <md-button>Hello {{ username }}</md-button>
+                    </md-menu-item>
+                    <md-menu-item ng-show="userLoggedIn">
+                        <md-button ng-click="showAccountsDialog($event,true)">Logout</md-button>
+                    </md-menu-item>
+                </md-menu-content>
+            </md-menu>
+            <span flex="5"></span>
+        </div>
+    </md-toolbar>
+    <!-- DESKTOP TOOLBAR END-->
+
+    <!-- MOBILE TOOLBAR -->
+    <md-toolbar class="show-sm show-xs hide-gt-sm md-scroll-shrink md-whiteframe-2dp"  >
+        <div class="md-toolbar-tools" ng-show="searchBox">
+            <md-button class="md-icon-button" ng-click="resetSearchBox()" aria-label="Menu">
+                <md-icon class="md-default-theme"  md-svg-src="media/svg/back.svg"></md-icon>
+            </md-button>
+
+            <form class="searchForm" flex>
+                <input class="searchInput" ng-model="search" type="text" placeholder="What are you looking for?"/><md-button ng-click="doSearch(search)" class="md-icon-button" style="padding:0px;margin: 0px" aria-label="searchBtn">
+                <md-icon class="md-default-theme" md-svg-src="media/svg/send.svg"></md-icon>
+            </md-button>
+            </form>
+        </div>
+        <!-- TOOLBOX WITHOUT SEARCHBOX -->
+        <div class="md-toolbar-tools" ng-show="!searchBox">
+            <md-button class="md-icon-button" ng-click="toogleSideNav()" aria-label="Menu" style="margin: 0px;padding: 0px;">
+                <md-icon class="md-default-theme"  md-svg-src="media/svg/menu.svg"></md-icon>
+            </md-button>
+             <md-button class="md-button" aria-label="" ng-click="showCityDialog($event)">
+                <md-icon class="md-default-theme"  md-svg-src="media/svg/location.svg"></md-icon>
+                {{city}}
+             </md-button>
+            <span flex></span>
+
+            <md-button class="md-icon-button" aria-label="Search" ng-click="setSearchBox()" style="margin: 0px;padding: 0px;">
+                <md-icon class="md-default-theme" md-svg-src="media/svg/search.svg"></md-icon>
+            </md-button>
+            <md-menu layout="row">
+                <md-button class="md-icon-button" aria-label="call"  ng-click="$mdOpenMenu()">
+                    <md-icon class="md-default-theme" md-svg-src="media/svg/user.svg"></md-icon>
+                    <md-tooltip md-direction="down">User</md-tooltip>
+                </md-button>
+            <md-menu-content width="2" flex >
+                    <md-menu-item ng-show="!userLoggedIn">
+                        <md-button ng-click="showAccountsDialog($event,true)">Login</md-button>
+                    </md-menu-item>
+                    <md-menu-item ng-show="!userLoggedIn">
+                        <md-button ng-click="showAccountsDialog($event,false)">Signup</md-button>
+                    </md-menu-item>
+
+                    <md-menu-item ng-show="userLoggedIn">
+                        <md-button >Hello {{ username }}</md-button>
+                    </md-menu-item>
+                    <md-menu-item ng-show="userLoggedIn">
+                        <md-button ng-click="showAccountsDialog($event,true)">Logout</md-button>
+                    </md-menu-item>
+                </md-menu-content>
+            </md-menu>
+            <md-button class="md-icon-button" aria-label="Open Settings" ng-click="" style="margin: 0px;padding: 0px;">
+                <md-icon class="md-default-theme"  md-svg-src="media/svg/morevert.svg" ></md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>

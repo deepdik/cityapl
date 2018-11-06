@@ -1,0 +1,17 @@
+<md-content layout-padding>
+    <div layout="row" class="breadCrumb" style="">
+            <span><a>Category</a></span>
+    </div>
+    <md-grid-list md-cols-xs="3" md-cols-sm="3" md-cols-md="6" md-cols-gt-md="8" md-row-height-gt-md="1:1" md-row-height="1:1" md-gutter="1px" md-gutter-gt-sm="8px">
+        <md-grid-tile  class="catgrid" ng-repeat="category in categories | orderBy:'name'" >
+            <div layout="column">
+                <a ng-href="category/{{ category.id }}" style="text-align: center">
+                    <md-icon class="catImgHome" md-svg-src="{{category.catImg}}"></md-icon>
+                </a>
+                <a ng-href="category/{{ category.id }}" class="categoryTileText">
+                {{ category.name }}
+                </a>
+            </div>
+        </md-grid-tile>
+    </md-grid-list>
+</md-content>

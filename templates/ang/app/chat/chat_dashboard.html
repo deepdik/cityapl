@@ -1,0 +1,77 @@
+
+<!--  <md-toolbar style="background-color:#008080" class="ng-isolate-scope" class="md-whiteframe-4dp">
+  <div class="md-toolbar-tools" layout="row">
+    <div flex>
+
+      <h1 style="font-size:19px; margin-left:16px;">CityAPL</h1>
+    </div>
+    
+    
+     <div layout="row" layout-align="end center">
+       <md-icon class="dash_toolbar_svg" md-svg-src="media/svg/search_lens.svg"></md-icon>
+     </div>
+       <div layout="row" layout-align="end center">
+       <md-icon  md-svg-src="media/svg/dots_option.svg"></md-icon>
+     </div>
+    
+  </div>
+
+
+</md-toolbar> -->
+
+
+
+
+
+
+    <md-content>
+      <md-list flex="">
+        
+        <md-list-item class="md-3-line" ng-repeat="opponent in opponent_username"  ng-if="opponent.owner.username == main_user && opponent.opponent.username != main_user" ng-click="null"  ng-href="chat/dialog/{{ opponent.opponent.username }}" 
+        class="1">
+        <div layout="row" flex>
+          <img src="media/svg/chat_user.svg" class="md-avatar">
+          <div class="md-list-item-text" layout="column" class="">
+            
+            <h3 style="color:#666666; font-size: 16px">{{ opponent.opponent.username | uppercase }}</h3>            
+             
+          </div>
+          <div layout="row" ng-repeat="msg in unseen_msg | unique:'dialog'" layout-align="center center" ng-show="{{opponent.id}} =={{msg.dialog}}" >
+          <span style="font-size:14px;color:#008080; font-weight:800;">
+
+            New Msg
+          </span>
+          
+
+          </div>
+          </div>
+
+          <md-divider md-inset ng-if="!$last"></md-divider>
+         
+        </md-list-item>
+             <md-list-item class="md-3-line" ng-repeat="opponent in opponent_username" 
+	 ng-if="opponent.owner.username !=main_user" ng-click="null" 
+        ng-href="chat/dialog/{{ opponent.owner.username }}" class="2">
+        <div layout="row" flex>
+          <img src="media/svg/chat_user.svg" class="md-avatar" alt="{{item.who}}">
+          <div class="md-list-item-text" layout="column" class="">
+            
+            <h3 style="color:#666666; font-size: 16px">{{ opponent.owner.username  | uppercase }}</h3>
+             
+          </div></div>
+          <div layout="row" ng-repeat="msg in unseen_msg |unique:'dialog'" layout-align="center center" ng-show="{{opponent.id}} =={{msg.dialog}}">
+           <span style="font-size:14px;color:#008080; font-weight:800;">
+
+            New Msg
+          </span>
+            
+          </div>
+
+          <md-divider md-inset ng-if="!$last"></md-divider>
+         
+        </md-list-item>
+        
+      </md-list>
+      
+    </md-content>
+

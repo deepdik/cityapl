@@ -1,0 +1,101 @@
+<div layout="row" flex>
+    <div flex>
+        <md-content layout-padding layout="column" >
+            <div layout="row" style="background: #fff;color:#808080" >
+                <h1 class="md-subhead" flex="60" hide-sm hide-xs hide-md></h1>
+                <md-button ng-hide="isSearchPage"flex style="padding: 0px;margin: 0px;" ng-click="showFilterDialog($event)">FILTER</md-button>
+                <!--  filter dropdowncode -->
+                <md-menu layout="row" style="padding: 0px;margin: 0px;" flex>
+                    <md-button flex ng-click="$mdOpenMenu()" style="padding: 0px;margin: 0px;">
+                        Sort By 
+                    </md-button>
+                    <md-menu-content width="6" flex>
+                        <md-menu-item >
+                            <md-button ng-click="sortByDistance()">Near Me</md-button>
+                        </md-menu-item>
+                        <md-menu-item >
+                            <md-button ng-click="orderByLikes()">Likes</md-button>
+                        </md-menu-item>
+                        <md-menu-item >
+                            <md-button ng-click="orderByName()">Name(A-Z)</md-button>
+                        </md-menu-item>
+                        <!-- <md-menu-item ng-repeat="filter in filters">
+                            <md-button ng-click="sortBy(filter.click,filter.tag)" >{{ filter.tag }}</md-button>
+                        </md-menu-item> -->
+                    </md-menu-content>
+                </md-menu>
+            </div>
+            <md-progress-linear ng-show="listLoader" md-mode="indeterminate" style="padding:0px"></md-progress-linear>
+            <div flex-xs flex-gt-xs="50" ng-show="shops.length" layout="column">
+                <md-card ng-repeat="shop in shops">
+                <a ng-href="shop/{{shop.slug}}">
+                    <md-card-title  style="padding-bottom: 0px">
+                        <md-card-title-media>
+                            <img  class="md-media-md card-media" src="{{shop.bannerImage}}" style="padding-right: 10px"/>
+                        </md-card-title-media>
+                        <md-card-title-text>
+                            <span class="md-headline">{{shop.shopName}}</span>
+                            <span class="md-subhead" ng-if="shop.tagline">({{shop.tagline}})</span>
+                            <div class="md-subhead">
+                            <span ng-if="shop.isOpen == false" style="background: #E47200; padding: 3px; color:#fff;">Closed Now</span><span ng-if="shop.isOpen == true" style="background: #008080; padding: 3px; color:#fff;">Open Now</span>
+                            </div>  
+                        </md-card-title-text>
+                    </md-card-title>
+                    </a>
+                    <md-card-actions layout="row" layout-align="start center" style="margin: 0px" >
+                        <md-button class="md-icon-button" aria-label="Like" ng-click="vote(shop.id,$index,true)" style="margin: 0px;padding: 0px;">
+                            <md-icon ng-class="{'liked':shop.isLiked == 1}"  class="md-default-theme" md-svg-src="media/svg/like.svg"></md-icon>
+                            <!-- <md-tooltip md-direction="down"> I like this shop </md-tooltip> -->
+                        </md-button>{{shop.likes}}
+                        <md-button class="md-icon-button" aria-label="Dislike" ng-click="vote(shop.id,$index,false)" style="margin: 0px;padding: 0px;">
+                            <md-icon ng-class="{'disliked':shop.isLiked == -1}" class="md-default-theme"  md-svg-src="media/svg/dislike.svg"></md-icon>
+                            <!-- <md-tooltip md-direction="down"> I don't like this shop</md-tooltip> -->
+                        </md-button>{{shop.dislikes}}
+                        <md-menu layout="row">
+                            <md-button class="md-icon-button" aria-label="share"  ng-click="$mdOpenMenu()">
+                                <md-icon class="md-default-theme" md-svg-src="media/svg/share.svg"></md-icon>
+                                <!-- <md-tooltip md-direction="down">Share</md-tooltip> -->
+                            </md-button>
+                            <md-menu-content width="3" flex>
+                                <md-menu-item>
+                                   <md-button ng-click="share('facebook',shop.slug)">Facebook
+                                    </md-button>
+                                </md-menu-item>
+                                <md-menu-item>
+                                    <md-button ng-click="share('twitter',shop.slug)">Twitter
+                                    </md-button>
+                                </md-menu-item>
+                            </md-menu-content>
+                        </md-menu>
+
+                        <span flex></span>
+                        <span  ng-show="shop.distance > 0">{{shop.distance | distanceFilter}}</span>
+                        <md-menu layout="row">
+                            <md-button class="md-icon-button" aria-label="call"  ng-click="$mdOpenMenu()">
+                                <md-icon class="md-default-theme" md-svg-src="media/svg/call.svg"></md-icon>
+                                <md-tooltip md-direction="down"> Call Owner </md-tooltip>
+                            </md-button>
+                            <md-menu-content width="3" flex>
+                                <md-menu-item>
+                                    <md-button ng-href="tel:shop.mobileNo">{{shop.mobileNo}}</md-button>
+                                </md-menu-item>
+                                <md-menu-item ng-show="shop.alternateMobileNo">
+                                    <md-button ng-href="tel:shop.alternateMobileNo">{{shop.alternateMobileNo}}</md-button>
+                                </md-menu-item>
+                            </md-menu-content>
+                        </md-menu>
+                    </md-card-actions>
+                </md-card>
+            </div>
+            <div flex-xs flex-gt-xs="50" ng-show="!shops.length" layout="column">
+                <md-card >
+                    <md-card-title >
+                        <md-card-title-text>
+                            <span class="md-headline">Nothing found</span>
+                        </md-card-title-text>
+                    </md-card-title>
+                    </md-card>
+            </div>
+        </md-content>
+    </div>
+</div>

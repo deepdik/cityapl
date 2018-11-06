@@ -1,0 +1,202 @@
+<md-dialog aria-label="select city" >
+    <md-progress-linear  ng-show ="loading" class="md-warn" md-mode="indeterminate" style="padding:0px"></md-progress-linear>
+    
+        <div layout=row >
+            <div flex=45 hide-xs hide-sm>
+                <img src="/media/img/login4.png" style="height: 100%;width: 100%;">
+            </div>
+            <div flex>
+            <div layout="row" layout-align="end start">
+               <md-button class="md-icon-button" ng-click="cancel()" aria-label="Menu">
+                <md-icon class="md-default-theme"  md-svg-src="media/svg/close.svg"></md-icon>
+               </md-button>
+            </div>
+
+                <!--sign up form Start-->
+                
+                <div ng-show="!flag">
+                    <md-dialog-content >
+                        <div class="md-dialog-content">
+                            <div layout="column" flex>
+                                <span class="md-display-1">Sign Up</span>
+                                <br>
+                                <div class="md-dialog-content">
+                                    <div layout="column" layout-sm="row" layout-align="center center">
+                                        <div ng-init="googlesignup='/media/img/signUpGoogle.png'">
+                                       
+                                           <a g-login href="#"> <img style="width:220px;height:45px" ng-src="{{googlesignup}}" ></a>
+                                        </div>
+
+                                        <div layout-align="center">
+                                            &nbsp;
+                                        </div>
+                                        <div ng-init="facebooksignup ='/media/img/fb-logo-signup.png'">
+                                           <a fb-login href="#"> <img style="width: 220px;height: 45px" ng-src="{{facebooksignup}}" class="md-raised"></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div layout="row" layout-align="center"><small style="color:red">{{Error}}</small></div>
+                            <div layout="row" layout-align="center">OR</div>
+            <form name='signupForm'>
+               <md-input-container class="md-block"  flex-gt-sm style="margin-bottom: 0px">
+                    <label>User Name</label>
+                    <md-icon md-svg-src="/media/img/email.svg" class="mdicon"></md-icon>
+                    <input required type="text" name="userName" ng-model="signupUser.userName" 
+                    ng-pattern="/^[A-Za-z0-9\.\-\_]{4,}$/">
+                    <div><small style="color:grey">Username should contain alphabet,numbers <br>and special symbol(- _ .)</small></div>
+                    <div><small style="color:red">{{signUpUsernameError}}</small></div>
+                    <!-- <div ng-messages="signupForm.userName.$error">
+                        <div ng-message="required">This is required.</div>
+                    </div> -->
+                </md-input-container>
+
+                <md-input-container class="md-block" flex-gt-sm>
+                    <label>Email</label>
+                    <md-icon md-svg-src="/media/img/email.svg" class="mdicon"></md-icon>
+                    <input required type="email" name="email" ng-model="signupUser.email" ng-pattern="/^.+@.+\..+$/" />
+                    <div><small style="color:red">{{signUpEmailError}}</small></div>
+                    <!--<div ng-messages="signupForm.email.$error" ng-show="signupForm.email.$dirty">-->
+                    <!--<div ng-message="required">Email is required.</div>-->
+                    <!--<div ng-message="ng-pattern">Email should be like youremail@domain.com</div>-->
+                    <!--</div>-->
+                </md-input-container>
+                <md-input-container class="md-block" flex-gt-sm style="margin-bottom: 0px">
+                    <label>Password</label>
+                    <md-icon md-svg-src="/media/img/email.svg" class="mdicon"></md-icon>
+                    <input type="password" name="password" ng-model="signupUser.password" required minlength="6">
+                    <div><small style="color:red">{{signUpPasswordError}}</small></div>
+                    <!--<div ng-messages="signupForm.password.$error" ng-show="signupForm.password.$dirty">-->
+                    <!--<div ng-message="required">This is required!</div>-->
+                    <!--<div ng-message="md-maxlength">That's too long!</div>-->
+                    <!--<div ng-message="minlength">Password must be of greater than 6 chars</div>-->
+                    <!--</div>-->
+                </md-input-container>
+                    <div layout="column" layout-align="start center">
+                    <input type="submit" value="Register" class="md-button md-raised md-primary" ng-click="doSignUp(signupUser)" ng-disabled="signupForm.$invalid || loading" style="width:200px;margin-bottom: 10px">
+                        
+                   
+                    <span class="md-caption" style="margin-bottom: 15px">By starting, you must agree to <a href="#">Cityapl's Terms <br>of Service and Privacy Policy</a></span>
+                    <span>Already a member? <a href="#" ng-click="setFlag()">sign in here</a></span>
+                </div>
+            </form>
+        </div>
+    </div>
+</md-dialog-content></div>
+
+
+
+                <!--login form Start-->  
+
+                <div ng-show="flag">
+                    <md-dialog-content ng-show="!foo">
+                        <div class="md-dialog-content">
+                            <div layout="column" flex>
+                                <span class="md-display-1">Sign In</span>
+                                <br>
+                                <div class="md-dialog-content">
+                                    <div layout="column" layout-sm="row" layout-align="center center">
+                                        <div ng-init="google='/media/img/google-sign-in.png'">
+                                           <a g-login href="#" > <img style="width:226px;height:54px" ng-src="{{google}}" class="md-raised"></a>
+                                        </div>
+
+                                        <div layout-align="center">
+                                            &nbsp;
+                                        </div>
+                                        <div ng-init="facebook ='/media/img/facebook-login-button.png'">
+                                           <a href="#" fb-login > <img style="width: 220px;height: 45px" ng-src="{{facebook}}" class="md-raised"></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div layout="row" layout-align="center"><small style="color:red">{{Error}}</small></div>
+                                <div layout="row" layout-align="center">OR</div>
+
+                <form name="loginForm">
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>Email/Username</label>
+                        <input required type="text" name="username" ng-model="user.username"  />
+                        <div><small style="color:red">{{loginUsernameError}}</small></div>
+                        <!--<div ng-messages="loginForm.email.$error" ng-show="loginForm.email.$dirty">-->
+                            <!--<div ng-message="required">Email is required.</div>-->
+                            <!--<div ng-message="ng-pattern">Email should be like youremail@domain.com</div>-->
+                        <!--</div>-->
+                    </md-input-container>
+
+                    <md-input-container class="md-block" flex-gt-sm style="margin-bottom: 0px">
+                    <label>Password</label>
+                    <input type="password" name="password" ng-model="user.password" required minlength="6">
+                    
+                    <!--<div ng-messages="loginForm.password.$error" ng-show="loginForm.password.$dirty">-->
+                        <!--<div ng-message="required">This is required!</div>-->
+                        <!--<div ng-message="md-maxlength">That's too long!</div>-->
+                        <!--<div ng-message="minlength">Password must be of greater than 6 chars</div>-->
+                    <!--</div>-->
+                    </md-input-container>
+
+                    <div layout="row" layout-align="end start"  style="margin-bottom:13px;font-size: 15px; color: #006969;">  
+                    <a href="#" ng-click="foo=!foo">Forgot Password?</a>
+                    </div>
+
+             <div layout="row" layout-align="center">
+                <input type="submit" value="Log in" ng-click="doLogin(user)" class="md-button md-raised md-primary" ng-disabled="loginForm.$invalid || loading" style="width:200px;margin-bottom: 20px">
+             </div>
+
+    <div layout="row" layout-align="center">
+        <span>Don't have an account <a href="#" ng-click="resetFlag()">sign up here</a></span>
+    </div>
+    </form> 
+    <br>   
+    <div style="color:red;text-align: center;"><small >{{loginNonFieldError }}</small></div>
+   </div>
+  </div>
+</md-dialog-content> </div>
+
+                    <!-- Reset password form Start -->
+                <div flex ng-hide="!foo">
+                    <md-dialog-content  >
+                        <div class="md-dialog-content" >
+                            <div layout="column" flex>
+                                <span class="md-display-1"> Reset Password </span>
+                                <br>
+                                <br>
+                                <div layout="row" layout-align="center"><span style="color:#696969;font-size:14px; "> Pls enter your email and we will send <br>you an email to reset your password</span></div>
+                                <br>
+                                <form name=forgetPassForm >
+                                    <md-input-container class="md-block" flex-gt-sm style="margin-bottom:0px" >
+                                        <label>Email</label>
+                                        <md-icon md-svg-src="/media/img/email.svg" class="mdicon"></md-icon>
+                                        <input type="email" ng-model="data.email" name="email" required >
+                                        <!-- <div ng-messages="forgetPassForm.email.$error"> -->
+                                            <!-- <ng-message when="required">Email is required</ng-message> -->
+                                        </div>
+                                    </md-input-container>
+                                    <div layout="row" layout-align="end start"  style="margin-bottom:10px;font-size: 15px;text-decoration: underline; color: #696969;">  
+                                    <a href="#" ng-click="foo=!foo">Go to Login</a>
+                                    </div>
+
+                                    <div layout="row" layout-align="center">
+                                        <input type="submit" class="md-button md-raised md-primary" value="Reset Password"
+                                        style="width:180px;" ng-click="forgetPassword(data)" ng-disabled="forgetPassForm.$invalid || loading"/>
+                                        
+                                    </div>
+                                </form>
+                                
+                                <br>
+                                <div layout="row" layout-align="center"><small style="color:red">{{resetPassError}}</small></div>
+                                <div >
+                                    <div ng-show="successMsg" style="color: green;font-size: 18px;text-align: center;"> <span >Email Sent Successfully !</span><br><span style="color:green;font-size:13px; text-align: center;"><br> A password reset message is sent to your <br>email address.For security reasons the link  <br>only be used for once . If you do not receive <br>your email within five minutes check<br> your spam folder</span></div>
+                                </div>
+
+                                <div >
+                                    <div ng-show="errorMsg" style="color:red;font-size: 18px; text-align: center;"> <span >Sorry ! Email Not Sent </span><br><span style="color:red;font-size:13px; text-align: center;"><br> We are unable to sent email due to some<br>  error.Please try after some time </span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </md-dialog-content>
+                </div>
+
+                    <!-- Reset password form End -->
+
+                </div>
+            </div>
+       
+    </md-dialog>

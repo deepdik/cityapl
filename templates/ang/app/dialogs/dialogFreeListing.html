@@ -1,0 +1,45 @@
+<md-dialog aria-label="List your shop" style="background: #fff" class="expanded_width_dialog" ng-cloak>
+<md-toolbar>
+    <div class="md-toolbar-tools">
+      <h2 class="md-flex">List your shop at cityAPL</h2>
+      <span flex></span>
+      <md-button class="md-icon-button" ng-click="hide()" aria-label="Menu">
+            <md-icon class="md-default-theme"  md-svg-src="media/svg/close.svg"></md-icon>
+        </md-button>
+    </div>
+  </md-toolbar>
+    <md-dialog-content>
+        <div class="md-dialog-content">
+        	<form name="freeListingForm" layout-padding>
+			    <md-input-container class="md-block">
+	     		    <label>Email</label>
+				    <input required ng-model="detail.email" name="email" type="email">
+				    <div ng-messages="freeListingForm.email.$error">
+		            <div ng-message="required">Email is required</div>
+		            </div>
+			    </md-input-container>
+
+			    <md-input-container class="md-block">
+	     		    <label>Contact Number*</label>
+				    <input required pattern="[789][0-9]{9}" ng-model="detail.mobileNo" name="contactNumber" type="text">
+				    <div ng-messages="freeListingForm.contactNumber.$error">
+		            <div ng-message="required">Your contact number will help us to reach you</div>
+		            <div ng-message="pattern">Invalid Mobile number. Please omit ( 0 or +91 )</div>
+				    </div>
+			    </md-input-container>
+
+			    <md-input-container class="md-block">
+	     		    <label>City</label>
+				    <input ng-model="detail.city" required name="city" type="text">
+				    <div ng-messages="freeListingForm.city.$error">
+		            <div ng-message="required">City is required</div>
+		            </div>
+			    </md-input-container>
+		       <md-button ng-disabled="freeListingForm.$invalid || loading" ng-click ="listShopQuerry(detail)" class="md-raised md-primary" style="padding: 0px">Submit</md-button>
+			</form>
+		    <!-- <md-progress-linear md-mode="indeterminate" style="padding:0px"></md-progress-linear> -->
+        </div>
+    </md-dialog-content>
+</md-dialog>
+
+

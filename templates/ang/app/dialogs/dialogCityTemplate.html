@@ -1,0 +1,32 @@
+<md-dialog aria-label="select city"  ng-cloak>
+    <div layout="row" layout-align="end start">
+        <md-button class="md-icon-button" ng-click="cancel()" aria-label="Menu">
+            <md-icon class="md-default-theme"  md-svg-src="media/svg/close.svg"></md-icon>
+        </md-button>
+    </div>
+    <form>
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <md-list>
+                    <md-subheader class="md-no-sticky">Select your City</md-subheader>
+                    <md-list-item ng-repeat="item in cityList | orderBy : 'name'">
+                        <md-item flex ng-click="city(item.city,item.id)">
+
+                            <a href="#">
+                                <md-item-content md-ink-ripple="#919191" layout="row" layout-align="start center">
+                                    <div class="inset">
+                                        <img src="{{item.cityImg}}" style="height:75px;width:75px ;border-radius: 50%;"></img>
+                                    </div>
+                                    <div class="inset"><h3 class="capitalize">{{item.city}}</h3>
+                                    </div>
+                                </md-item-content>
+                            </a>
+                            <md-divider md-inset ng-if="!$last"></md-divider>
+                        </md-item>
+
+                    </md-list-item>
+                </md-list>
+            </div>
+        </md-dialog-content>
+    </form>
+</md-dialog>

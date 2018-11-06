@@ -1,0 +1,163 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en" ng-app="cityapl">
+<head>
+    <base href="/">
+    <meta charset="UTF-8">
+    <meta https-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#008080">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#008080">
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="#008080">
+    <title>Welcome to Cityapl</title>
+    <link rel="icon" href="media/img/logo.png" type="image/png" sizes="16x16">
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.7/angular-material.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
+    <link rel="stylesheet" href="{% static 'css/app/main.css' %}" >
+     <link rel="stylesheet" href="{% static 'css/app/chat.css' %}" >
+
+  
+<!--     <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script> -->
+    
+    <style>
+    #loader {
+        display: block;
+        position: absolute;
+        top:0;
+        width:100vw;
+        height: 100vh;
+        z-index: 9999;
+        background: url(media/svg/loader.svg) center no-repeat #EAEAEA;
+    }
+   
+    
+    </style>
+
+    <script>
+        var session_key = '{{ request.session.session_key }}';
+    </script>
+     <script>
+        var session_key1 = '{{ request.session.session_key }}/';
+    </script>
+    
+    
+
+
+</head>
+<body layout="column"  ng-cloak>
+<div id="loader"></div>
+
+    <cityapl-toolbar>
+        
+    </cityapl-toolbar>
+    <md-content layout="column" flex >
+        <div class="container" layout="row" flex>
+             <div flex="15" hide-sm hide-xs>
+
+            </div>
+            <div layout="column" flex ng-view>
+            </div>
+            <div flex="15" hide-sm hide-xs	>
+            </div>
+        </div>
+    </md-content>
+</div>
+<script type="text/javascript">
+   
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-cookies.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-animate.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-aria.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-messages.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-route.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-resource.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-filter/0.5.8/angular-filter.min.js"></script>
+
+
+<script src='{% static "/js/app/external/angularjs-social-login.js" %}'></script>
+
+
+    <script src="{% static 'js/app/app.module.js' %}"></script>
+    <script src="{% static 'js/app/app.config.js' %}"></script>
+    
+    <script src="{% static 'js/app/resources/city/city.module.js' %}"></script>
+    <script src="{% static 'js/app/resources/city/city.service.js' %}"></script>
+
+    <script src="{% static 'js/app/resources/category/category.module.js' %}"></script>
+    <script src="{% static 'js/app/resources/category/category.service.js' %}"></script>
+
+    <script src="{% static 'js/app/resources/subcategory/subcategory.module.js' %}"></script>
+    <script src="{% static 'js/app/resources/subcategory/subcategory.service.js' %}"></script>
+
+    <script src="{% static 'js/app/resources/shop/shop.module.js' %}"></script>
+    <script src="{% static 'js/app/resources/shop/shop.service.js' %}"></script>
+
+
+    <script src="{% static 'js/app/resources/feedback/feedback.module.js' %}"></script>
+    <script src="{% static 'js/app/resources/feedback/feedback.service.js' %}"></script>
+
+    <script src="{% static 'js/app/resources/pricing/pricing.module.js' %}"></script>
+    <script src="{% static 'js/app/resources/pricing/pricing.service.js' %}"></script>
+
+
+
+    <script src="{% static 'js/app/cityapl-toolbar/cityapl-toolbar.module.js' %}"></script>
+    <script src="{% static 'js/app/cityapl-toolbar/cityapl-toolbar.component.js' %}"></script>
+
+    <script src="{% static 'js/app/category-list/category-list.module.js' %}"></script>
+    <script src="{% static 'js/app/category-list/category-list.component.js' %}"></script>
+    
+    <script src="{% static 'js/app/subcategory-list/subcategory-list.module.js' %}"></script>
+    <script src="{% static 'js/app/subcategory-list/subcategory-list.component.js' %}"></script>
+    
+    <script src="{% static 'js/app/shop-list/shop-list.module.js' %}"></script>
+    <script src="{% static 'js/app/shop-list/shop-list.component.js' %}"></script>
+    <script src="{% static 'js/app/shop-list/shop-list.filter.js' %}"></script>
+   
+
+    <script src="{% static 'js/app/shop-detail/shop-detail.module.js' %}"></script>
+    <script src="{% static 'js/app/shop-detail/shop-detail.component.js' %}"></script>
+    <script src="{% static 'js/app/shop-detail/shop-detail.filter.js' %}"></script>
+
+    <script src="{% static 'js/app/change-password/change-password.module.js' %}"></script>
+    <script src="{% static 'js/app/change-password/change-password.component.js' %}"></script>
+
+     <script src="{% static 'js/app/chat-dashboard/chat-dashboard.module.js' %}"></script>
+    <script src="{% static 'js/app/chat-dashboard/chat-dashboard.component.js' %}"></script>
+
+     <script src="{% static 'js/app/change-password/change-password.module.js' %}"></script>
+    <script src="{% static 'js/app/change-password/change-password.component.js' %}"></script>
+
+     <script src="{% static 'js/app/chat-dialog/chat-dialog.module.js' %}"></script>
+    <script src="{% static 'js/app/chat-dialog/chat-dialog.component.js' %}"></script>
+
+    <script  src="https://cdnjs.cloudflare.com/ajax/libs/scrollmonitor/1.2.0/scrollMonitor.js"
+            integrity="sha256-BseZlDlA+yL4qu+Voi82iFa5aaifralQEXIjOjaXgeo=" crossorigin="anonymous"></script>
+
+<script>
+    $(document).ready(function(){
+        $(window).load(function() {
+        // Animate loader off screen
+        $("#loader").delay(500).fadeOut();
+        })
+    })
+     window.addEventListener("load",function() {
+    setTimeout(function(){
+        
+        window.scrollTo(0, 1);
+    }, 0);
+    });
+</script>
+
+
+
+</body>
+</html>

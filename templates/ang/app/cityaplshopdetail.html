@@ -1,0 +1,163 @@
+<div layout="row" flex>
+   <div flex>
+      <md-content layout-padding layout="column" >
+         <md-card>
+            <md-card-header>
+               <md-card-header-text>
+                  <span class="md-title">{{shop.shopName}}</span>
+                  <span class="md-subhead">{{shop.tagline}}</span>
+               </md-card-header-text>
+               <!-- <md-card-actions layout="row" layout-align="end center">
+                  <md-button class="md-raised md-accent">Follow</md-button>
+                  </md-card-actions> -->
+            </md-card-header>
+            <div class="image_wrapper">
+               <img ng-src="{{shop.bannerImage}}" class="md-card-image" height="auto" width="100%" alt="shop banner">
+            </div>
+            <md-card-actions layout="row" layout-align="start center">
+               <md-button class="md-icon-button" aria-label="Like" ng-click="vote(shop.id,true)" style="margin: 0px;padding: 0px;">
+                  <md-icon ng-class="{'liked':shop.isLiked == 1}"  class="md-default-theme" md-svg-src="media/svg/like.svg"></md-icon>
+                  <!-- <md-tooltip md-direction="down"> I like this shop </md-tooltip> -->
+               </md-button>
+               {{shop.likes}}
+               <md-button class="md-icon-button" aria-label="Dislike" ng-click="vote(shop.id,false)" style="margin: 0px;padding: 0px;">
+                  <md-icon ng-class="{'disliked':shop.isLiked == -1}" class="md-default-theme"  md-svg-src="media/svg/dislike.svg"></md-icon>
+                  <!-- <md-tooltip md-direction="down"> I don't like this shop</md-tooltip> -->
+               </md-button>
+               {{shop.dislikes}}
+               <md-menu layout="row">
+                  <md-button class="md-icon-button" aria-label="share"  ng-click="$mdOpenMenu()">
+                     <md-icon class="md-default-theme" md-svg-src="media/svg/share.svg"></md-icon>
+                     <!-- <md-tooltip md-direction="down">Share</md-tooltip> -->
+                  </md-button>
+                  <md-menu-content width="3" flex>
+                     <md-menu-item>
+                        <md-button ng-click="share('facebook',shop.slug)">Facebook
+                        </md-button>
+                     </md-menu-item>
+                     <md-menu-item>
+                        <md-button ng-click="share('twitter',shop.slug)">Twitter
+                        </md-button>
+                     </md-menu-item>
+                  </md-menu-content>
+               </md-menu>
+               <span flex></span>
+               <md-menu layout="row">
+                  <md-button class="md-icon-button" aria-label="call"  ng-click="$mdOpenMenu()">
+                     <md-icon class="md-default-theme" md-svg-src="media/svg/call.svg"></md-icon>
+                     <md-tooltip md-direction="down"> Call Owner </md-tooltip>
+                  </md-button>
+                  <md-menu-content width="3" flex>
+                     <md-menu-item>
+                        <md-button ng-href="tel:shop.mobileNo" >{{shop.mobileNo}}</md-button>
+                     </md-menu-item>
+                     <md-menu-item>
+                        <md-button ng-show="shop.alternateMobileNo" ng-href="tel:shop.alternateMobileNo">{{shop.alternateMobileNo}}</md-button>
+                     </md-menu-item>
+                  </md-menu-content>
+               </md-menu>
+            </md-card-actions>
+            <md-card-content style="padding: 0px">
+               <md-tabs md-dynamic-height md-border-bottom>
+                  <md-tab label="Contact">
+                     <md-content class="md-padding" style="background: #fff">
+                        <div layout="column" layout-gt-sm="row">
+                           <div>
+                              <iframe
+                                 id="myMap"
+                                 frameborder="0" style="border:0"
+                                 src="" allowfullscreen>
+                              </iframe>
+                           </div>
+                           <div layout="column" layout-padding>
+                              <span ng-show="shop.ownerName">
+                                 <md-icon class="md-default-theme" style="color:#008080" md-svg-src="media/svg/account.svg"></md-icon>
+                                 {{shop.ownerName}}
+                              </span>
+                              <span ng-show="shop.email">
+                                 <md-icon class="md-default-theme" style="color:#008080" md-svg-src="media/svg/mail.svg"></md-icon>
+                                 {{shop.email}}
+                              </span>
+                              <span>
+                                 <md-icon class="md-default-theme" md-svg-src="media/svg/call.svg"></md-icon>
+                                 {{shop.mobileNo}}
+                                 <span ng-show="shop.alternateMobileNo"> , {{shop.alternateMobileNo}}</span> 
+                              </span>
+                              <span>
+                                 <md-icon class="md-default-theme" md-svg-src="media/svg/location.svg"></md-icon>
+                                 {{shop.shopAddress}} {{shop.pricingTabName}}
+                              </span>
+                              <!-- <span>{{shop.city.city}}</span> -->
+                              <span></span>
+                           </div>
+                        </div>
+                     </md-content>
+                  </md-tab>
+
+                  <md-tab ng-if="shop.pricingTabName != ''" label="{{shop.pricingTabName}}">
+                     <md-content class="md-padding" style="background: #fff">
+                        <md-list>
+                           <md-list-item ng-class="{'hideBox':'pricingData.length < 5'}">
+                              <form flex>
+                              <md-input-container  class="md-block">
+                                <label>Search in the list below</label>
+                                <input type="text" ng-model="search">
+                              </md-input-container>
+                              </form>
+                           </md-list-item>
+                           <md-list-item  ng-repeat="data in pricingData | filter:search">
+                           <md-card flex>
+                             <md-card-title>
+                               <md-card-title-text>
+                                 <span>{{data.name}}</span>
+                               </md-card-title-text>
+                             </md-card-title>
+                             <md-card-actions layout="row" layout-align="end center">
+                               <span style="color:#008080">{{data.price}}</span>
+                             </md-card-actions>
+                           </md-card>
+                           </md-list-item>
+                        </md-list>
+                     </md-content>
+                  </md-tab>
+                  <md-tab label="Feedback">
+                     <md-content flex style="background: #fff">
+                        <md-list>
+                           <md-list-item class="md-4-line">
+                              <form name="feedbackForm" style="padding:15px " flex>
+                                 <md-input-container style="margin-bottom: 5px;" class="md-block" flex>
+                                    <label>Share your feedback</label>
+                                    <textarea ng-model="feedback.content" name="content"  md-maxlength="450" rows="3" md-select-on-focus></textarea>
+                                 </md-input-container>
+                                 <div><small style="color:red">{{feedbackContentError}}</small></div>
+                                 <md-button  ng-click="postFeedback(feedback)" class="md-raised md-primary" ng-click="" ng-disabled="feedbackForm.$invalid">Submit
+                                 </md-button>
+                              </form>
+                              <md-divider inset></md-divider>
+                           </md-list-item>
+                           <md-progress-linear ng-show="feedbackSubmitLoader" md-mode="indeterminate" style="padding:0px"></md-progress-linear>
+                           <md-list-item class="md-3-line noright" ng-repeat="feedback in feedbacks">
+                              <img ng-src="media/svg/userAvatar.svg" lass="md-avatar">
+                              <div class="md-list-item-text">
+                                 <h3 style="color:#00776b" ng-show="feedback.user.name">{{feedback.user.name}}</h3>
+                                 <h3 style="color:#00776b" ng-show="feedback.user.name == ' '">{{feedback.user.username}}</h3>
+                                 <!-- removing ' ' will break the code -->
+                                 <small><i>{{feedback.timestamp |timeago}}</i></small>
+                                 <p>
+                                    {{ feedback.content }}
+                                 </p>
+                                 <!-- <md-button ng-show="currentuser == feedback.user.username" ng-click="shoEditFeedbackDialog($event)" class="md-secondary md-icon-button" ng-click="" aria-label="edit">
+                                    <md-icon md-svg-src="media/svg/delete.svg"></md-icon>
+                                    </md-button> -->
+                              </div>
+                              <md-divider inset></md-divider>
+                           </md-list-item>
+                        </md-list>
+                     </md-content>
+                  </md-tab>
+               </md-tabs>
+            </md-card-content>
+         </md-card>
+      </md-content>
+   </div>
+</div>

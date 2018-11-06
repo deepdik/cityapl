@@ -1,0 +1,213 @@
+'use strict';
+
+angular.module('shopDetail').
+	component('shopDetail',{
+		template: "<ng-include src='getTemplateUrl()'/>",
+	//	templateUrl:'api/templates/cityaplshopdetail.html',
+		controller: function($mdDialog,$scope,$routeParams,$cookies,$http,$mdToast,$rootScope,$route,Shops,Feedbacks,Pricing){
+			$scope.loading = true;
+            $scope.shop = null;
+            $scope.pageError = false;
+            $scope.notFound = false;
+            $scope.feedbackSubmitLoader = false
+
+            $scope.getTemplateUrl = function(){
+                if ($scope.loading) {
+                    return '/api/templates/loader/listloader.html'
+                } else if ($scope.notFound) {
+                     return '/api/templates/error/404.html'
+                } else if ($scope.pageError) {
+                    return '/api/templates/error/500.html'
+                }else {
+                    return '/api/templates/cityaplshopdetail.html'
+                }
+            }
+			var slug = $routeParams.slug
+			var token = $cookies.get('token')
+			if(token){
+					$scope.currentuser = $cookies.get('username')
+					var config = {'slug':slug}
+                	getShopsAuthenticatedUser(token,config)
+                }else{
+                	Shops.get({'slug':slug},function(data){
+                		$scope.loading = false
+						$scope.shop = data
+						$scope.feedbacks = data.feedback
+						if(data.pricingTabName !=""){
+							Pricing.query({'slug':slug},function(data){
+								$scope.pricingData = data
+							}) 
+						}
+						var source = {
+							lat:data.location.coordinates[1],
+							long:data.location.coordinates[0]
+						}
+						if (navigator.geolocation) {
+						navigator.geolocation.getCurrentPosition(function(data){
+							getDirectedMap(source,data.coords)
+						},function(error){
+							getSimpleMap(source)	
+						});
+						}else{
+							getSimpleMap(source)
+						}
+						
+					},function(responseError){
+						$scope.loading = false
+						if(responseError.status == 500){
+							$scope.pageError = true;
+						}else if(responseError.status == 404){
+							$scope.notFound = true
+						}
+					})
+                }
+
+            function getSimpleMap(source){
+            	var mapUrl = "https://www.google.com/maps/embed/v1/place?key=AIzaSyBogiSJi0TbthgTeatRvX03BgYAXViSoQg&q="+source.lat+","+source.long
+            	$(document).ready(function(){
+            		document.getElementById("myMap").src = mapUrl
+ 				});
+            }
+            function getDirectedMap(source,dest){
+            	var mapUrl = "https://www.google.com/maps/embed/v1/directions?key=AIzaSyBogiSJi0TbthgTeatRvX03BgYAXViSoQg&origin="+ source.lat+","+source.long +"&destination="+ dest.latitude+","+dest.longitude +"&avoid=tolls|highways"
+            	$(document).ready(function(){
+            		document.getElementById("myMap").src = mapUrl
+ 				});
+            }
+			function getShopsAuthenticatedUser(token,queryParams){				
+				var config = {
+					method : 'GET',
+					url : 'api/v1/cityapl/shops/'+slug+'/',
+					params : {},
+					headers : {
+						'Authorization': 'JWT  ' + token
+					}
+				}
+				$http(config).then(function successCallback(response) {
+					$scope.loading = false
+					var r_data = response.data
+					$scope.shop = r_data
+	        		$scope.feedbacks = r_data.feedback
+	        		if(r_data.pricingTabName !=""){
+							Pricing.query({'slug':slug},function(data){
+								$scope.pricingData = data
+							}) 
+						}
+	        		var source = {
+						lat:r_data.location.coordinates[1],
+						long:r_data.location.coordinates[0]
+						}
+					if (navigator.geolocation) {
+						navigator.geolocation.getCurrentPosition(
+						function(data){
+							getDirectedMap(source,data.coords)
+						},function(error){
+							getSimpleMap(source)	
+						});
+					}else{
+						getSimpleMap(source)
+					}
+					
+	        	}, function errorCallback(response) {
+				    $scope.loading = false
+				    if(response.status == 500){
+						$scope.pageError = true;
+					}else if(response.status == 404){
+						$scope.notFound = true
+					}else if(response.status == 401){
+						$cookies.remove('token')
+						$route.reload();
+					}
+				  });
+			}
+			$scope.postFeedback = function(feedbackData){	
+				var token = $cookies.get('token')
+				var headers = {}
+        		if (token){
+					$scope.feedbackContentError = ""
+					if(!feedbackData){
+						$scope.feedbackContentError = "This field is required"
+					}else{
+						$scope.feedbackSubmitLoader = true
+						Feedbacks.foo(token).create({
+						content:feedbackData.content,
+						shopSlug:slug,
+						'headers':headers
+						},function(data){
+							$scope.feedbackSubmitLoader = false
+							$scope.feedbacks.unshift(data)
+							$mdToast.showSimple("Thanks for your valuable feedback");							
+						},
+						function(error){
+							$scope.feedbackSubmitLoader = false
+							if(error.status == 401){
+								$cookies.remove('token')
+								$route.reload();
+							}
+						})
+					}
+				}else{
+					$mdToast.showSimple("Please Login to submit feedback");
+				}
+			}
+
+			$scope.share  = function(site,slug){
+				if(site == "facebook"){
+					var url = "https://www.facebook.com/sharer/sharer.php?u=cityapl.com/shop/" + slug
+					window.location = url
+				}else if(site=="twitter"){
+					var url = "https://twitter.com/home?status=cityapl.com/shop/" + slug
+					window.location = url
+				}
+			}
+			
+			$scope.vote = function(shopId,up){
+				var token = $cookies.get('token')
+				if(token){
+					var config = {
+						method : 'POST',
+						url : 'api/v1/cityapl/vote/',
+						data : {
+							liked:up,
+							shop :shopId
+						},
+						headers : {
+							'Authorization': 'JWT  ' + token
+						}
+					}
+					$http(config).then(function successCallback(response){
+						var r_data = response.data
+						var likeCnt = r_data['likeCnt']
+		                var dislikeCnt = r_data['dislikeCnt']
+		                if(likeCnt == 1){
+		             		$scope.shop['isLiked'] = 1
+		                }else if(dislikeCnt==1){
+		                	$scope.shop['isLiked'] = -1
+		                }else{
+		                	$scope.shop['isLiked'] = 0
+		                }
+						$scope.shop['likes'] += r_data['likeCnt']
+						$scope.shop['dislikes'] += r_data['dislikeCnt']
+					},
+					function errorCallback(response) {
+					    $scope.loading = false
+					    if(response.status == 500){
+							$scope.pageError = true;
+						}else if(response.status == 404){
+							$scope.notFound = true
+						}else if(response.status == 401){
+							$cookies.remove('token')
+							$route.reload();
+						}
+				  	})
+				}else{
+					$mdToast.show(
+		                    $mdToast.simple()
+		                    .textContent("Please Login to vote")
+		                    .hideDelay(3000)
+		                );
+				}
+			}				
+		}
+	}
+);

@@ -1,0 +1,76 @@
+.messages-container {
+  height: calc(100% - 70px);
+  overflow-x: hidden;
+
+ 
+  position:absolute;
+  width: 100%;
+}
+
+.messages {
+  width: 100%;
+  position:absolute;
+  margin-bottom: 15px;
+ 
+  padding: 10px;
+  overflow-x: hidden;
+  height:calc(100% - 70px);
+}
+/*@media only screen and (max-width:600px){
+ .messages-container {
+  height:500px;
+  overflow: auto;
+ 
+  position:absolute;
+  width: 400px;
+}
+
+.messages {
+  width:400px;
+  position:absolute;
+  margin-bottom: 40px;
+ 
+  padding: 20px;
+  overflow: auto;
+  height:500px;
+}
+
+}*/
+
+.badge-notify{
+   background:red;
+   position:relative;
+   top: -20px;
+   left: -35px;
+  }
+
+   .notification-container {
+    position: relative;
+    width: 16px;
+    height: 16px;
+    top: 15px;
+    left: 15px;
+    
+    i {
+        color: #fff;
+    }
+}
+
+.notification-counter {   
+    position: absolute;
+    top: -2px;
+    left: 12px;
+    
+    background-color: rgba(212, 19, 13, 1);
+    color: #fff;
+    border-radius: 3px;
+    padding: 1px 3px;
+    font: 8px Verdana;
+}
+
+
+
+.fake-notification {
+    font: 10px Arial;
+    margin-top: 50px;
+}

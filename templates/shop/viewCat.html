@@ -1,0 +1,156 @@
+{% extends "shop/baseTemplate.html"%}
+{% block content %}
+<div class="row">
+   <div class="col-md-4" id = "categories">
+      <h2 class="title">Categories</h2>
+      <ul class="data">
+         {% for category in categories %}
+         <li><a data-catid="{{category.id}}">{{ forloop.counter }}. {{category.name}}</a></li>
+         {% endfor %}
+      </ul>
+   </div>
+   <div id="subcategories"  class="col-md-4">
+   </div>
+   <div id="shops"  class="col-md-4">
+   </div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script>
+    function showDataShop(dataConf){
+      
+      var shopUrl = "https://cityapl.com/api/cityapladmin/shops/";
+      $.ajax({
+        url: shopUrl,
+        method: "GET",
+        data: dataConf,
+        success: function(data) {
+          $("#subcategories").addClass("box");
+          console.log(data);
+          var htmlData="<h2 class='title'>Shops</h2><ul class='data'>";
+          $("#subcategories").addClass("box");
+          if (data.length == 0) {
+            htmlData += "<li>No Shops found</li>";
+          }
+          for (i = 0; i < data.length; i++) {
+            htmlData += "<li>"+(i + 1)  +". "+ (data[i].shopName)+"</li>";
+            if (data[i].distance >= 0){
+              htmlData += "<li style='color:red;font-size:15px'>"+ Math.round(Number(data[i].distance)) +" meter </li>";
+            }
+          }
+          htmlData += "</ul>";
+          $("#shops").html(htmlData);
+        },
+        error: function(error) {
+          console.log(error);
+        }
+      });
+    }
+   $(document).ready(function() {
+    $('#categories a').click(function() {
+      $("#shops").html("");
+      $('#categories a').removeClass("activated");
+      $(this).addClass("activated");
+      var id = $(this).attr('data-catid');
+      var url = "https://cityapl.com/api/cityapladmin/subcategories/?category=" + id;
+      var htmlData = "<h2 class='title'>Sub Categories</h2><ul class='data'>"
+      $.get(url, function(data, status) {
+        $("#categories").addClass("box");
+        if (data.length == 0) {
+          htmlData += "<li>No Sub-Categories found</li>";
+        }
+        for (i = 0; i < data.length; i++) {
+          htmlData += "<li><a data-subcatid=" + data[i].id + ">" + (i + 1) + ". " + (data[i].name) + "</a></li>";
+          // htmlData += "<li>"+data[i] + "</li>";
+        }
+        htmlData += "</ul>";
+        $("#subcategories").html(htmlData);
+        // $("#subcategories").hide().html(htmlData).show(600);
+      });
+    });
+   });
+
+   $(document).ready(function() {
+    $("#subcategories").on('click', 'a', function() {
+      $('#subcategories a').removeClass("activated");
+      $(this).addClass("activated");
+      var id = $(this).attr('data-subcatid');
+      var category = $("#categories a.activated").attr('data-catid');
+      var subCategory = id;
+   //    var url = "https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyA3_rxArXBWYlihCN28AcrgAlEfhK0GY8A"
+   //    $.ajax({
+   //      url: url,
+   //      method: "POST",
+   //      data: {},
+   //      success: function(data) {
+   //        var lng = data.location.lng
+   //        var lat = data.location.lat
+   //        var point = lng +',' + lat;
+   //        var dataConf = {
+   //          'category': category,
+   //          'subCategory': subCategory,
+   //          'dist':4000,
+   //          'point':point,
+   //        };
+   //        showDataShop(dataConf);
+   //        console.log(data);
+   //      },
+   //      error: function(error) {
+   //        console.log(error);
+   //        var dataConf = {
+   //          'category': category,
+   //          'subCategory': subCategory,
+   //        };
+   //        showDataShop(dataConf);
+   //      }
+   //    });
+     if(navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function(position) {
+      var point = position.coords.longitude + ',' + position.coords.latitude;
+  //    alert(point);
+      var dataConf = {
+          'category': category,
+          'subCategory': subCategory,
+          'dist':4000,
+          'point':point,
+        };
+        showDataShop(dataConf);
+
+      },
+      function() {
+      var dataConf = {
+          'category': category,
+          'subCategory': subCategory,
+        };
+        showDataShop(dataConf);
+      });
+    }else{
+      alert("Geolocation is not supported by this browser.");
+      var dataConf = {
+          'category': category,
+          'subCategory': subCategory,
+        };
+        showDataShop(dataConf);
+    }
+
+
+      // var url = "http://127.0.0.1:8000/api/cityapladmin/subcategories/?category="+ id ;
+      // var htmlData = "<h2 class='title'>Sub Categories</h2><ul class='data'>"
+      // $.get(url, function(data, status){
+      //   $("#subcategories").addClass("box");
+      //   if (data.length == 0){
+      //     htmlData += "<li>No Sub-Categories found</li>";
+      //   }
+      //   for (i = 0; i < data.length; i++) { 
+      //     htmlData += "<li><a data-subcatid="+ data[i].id +">"+(i+1)+". " + (data[i].name) + "</a></li>";
+      //   // htmlData += "<li>"+data[i] + "</li>";
+      //   }
+      //   htmlData += "</ul>";
+      //   $("#subcategories").html(htmlData);
+      //   // $("#subcategories").hide().html(htmlData).show(600);
+      // });
+    });
+
+   });
+</script>
+{% endblock %}
